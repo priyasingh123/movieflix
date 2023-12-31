@@ -15,7 +15,6 @@ const Navbar = ({setMovies}) => {
 
             const res = await fetch(url)
             const response = await res.json()
-            console.log ('here',response)
             setMovies(response.results)
         }
         
