@@ -25,11 +25,11 @@ const Navbar = ({ setMovies }) => {
     const response = await res.json();
     setGenres(response.genres);
   };
+
   useEffect(() => {
     fetchGenres();
     fetchMovies();
   }, []);
-  // },[filter])
 
   const handleFilter = (e) => {
     setFilter(e.target.id);
@@ -39,15 +39,14 @@ const Navbar = ({ setMovies }) => {
     <div className="navbar">
       <img className="navbar-img" src={img} alt="logo" />
       <label className="logo-title">MOVIEFIX</label>
-      <div className="menu-items">
+      <div className="menu-items" onClick={(e) => handleFilter(e)}>
         {genres.map((genre) => {
           return (
             <Link
-              onClick={(e) => handleFilter(e)}
               className={`category ${
                 filter === genre.name ? "background-red" : ""
               }`}
-              to={"/"}
+              to={"#"}
               id={genre.name}
             >
               {genre.name}
