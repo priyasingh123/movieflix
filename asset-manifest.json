@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/moviefix/static/css/main.2e6208ca.css",
-    "main.js": "/moviefix/static/js/main.904f17e6.js",
+    "main.js": "/moviefix/static/js/main.311169f4.js",
     "static/js/787.20d3ae1e.chunk.js": "/moviefix/static/js/787.20d3ae1e.chunk.js",
     "index.html": "/moviefix/index.html",
     "main.2e6208ca.css.map": "/moviefix/static/css/main.2e6208ca.css.map",
-    "main.904f17e6.js.map": "/moviefix/static/js/main.904f17e6.js.map",
+    "main.311169f4.js.map": "/moviefix/static/js/main.311169f4.js.map",
     "787.20d3ae1e.chunk.js.map": "/moviefix/static/js/787.20d3ae1e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.2e6208ca.css",
-    "static/js/main.904f17e6.js"
+    "static/js/main.311169f4.js"
   ]
 }
