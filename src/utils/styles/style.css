@@ -17,10 +17,9 @@
 }
 
 .navbar-img {
-  flex: 1;
   margin: 2px;
-  width: 100px;
-  height: 100px;
+  width: 132px;
+  height: 115px;
 }
 
 .logo-title {
@@ -35,7 +34,7 @@
 }
 
 .category {
-  margin: 6px;
+  margin: 6px 6px 11px 6px;
   padding: 8px 29px;
   border-radius: 10px;
   background-color: #453e3e;

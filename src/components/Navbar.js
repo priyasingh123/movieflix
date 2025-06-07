@@ -38,7 +38,7 @@ const Navbar = ({ setMovies }) => {
   return (
     <div className="navbar">
       <img className="navbar-img" src={img} alt="logo" />
-      <label className="logo-title">MOVIEFIX</label>
+      <label className="logo-title">MOVIEFLIX</label>
       <div className="menu-items" onClick={(e) => handleFilter(e)}>
         {genres.map((genre) => {
           return (
