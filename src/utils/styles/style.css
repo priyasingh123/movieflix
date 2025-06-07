@@ -1,11 +1,14 @@
 * {
   margin: 0;
   padding: 0;
+  background-color: black;
 }
 
 .navbar {
   display: flex;
   position: relative;
+  margin: 0 2%;
+  background-color: white;
 }
 
 .menu-items {
@@ -20,17 +23,19 @@
   margin: 2px;
   width: 132px;
   height: 115px;
+  /* background-color: white; */
 }
 
 .logo-title {
   position: absolute;
-  bottom: -5px;
+  bottom: 0px;
   padding: 0;
   left: 2px;
   color: red;
   font-weight: 1000;
   font-size: x-large;
   flex: 1;
+  background-color: white;
 }
 
 .category {
@@ -68,6 +73,7 @@
   display: flex;
   flex-wrap: wrap;
   margin: 0 2%;
+  justify-content: space-between;
 }
 
 .movie-board {

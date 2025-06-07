@@ -7,6 +7,7 @@ const MovieBoard = ({ movies }) => {
   const [year, setYear] = useState(2012);
   const [page, setPage] = useState(1);
 
+  // TODO: move this function in common place
   const fetchMoreData = async () => {
     const baseUrl = process.env.REACT_APP_BASEURL;
     const apiKey = process.env.REACT_APP_APIKEY;
@@ -29,7 +30,7 @@ const MovieBoard = ({ movies }) => {
       <InfiniteScroll
         dataLength={allMovies}
         next={fetchMoreData}
-        hasMore={Number(year) < 2024}
+        hasMore={Number(year) < 2025}
         loader={<h4>Loading...</h4>}
       >
         <label className="year-label white-label">{year}</label>
