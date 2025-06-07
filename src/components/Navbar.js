@@ -35,33 +35,25 @@ const Navbar = ({ setMovies }) => {
     setFilter(e.target.id);
   };
 
-  let count = 0;
   return (
     <div className="navbar">
       <img className="navbar-img" src={img} alt="logo" />
       <label className="logo-title">MOVIEFIX</label>
       <div className="menu-items">
-        <ul onClick={(e) => handleFilter(e)}>
-          {genres.map((genre) => {
-            count++;
-            if (count <= 10) {
-              return (
-                <Link className={`list-item`} to={"/"}>
-                  <li
-                    key={genre.name}
-                    id={genre.name}
-                    className={` category ${
-                      filter === genre.name ? "background-red" : ""
-                    }`}
-                  >
-                    {genre.name}
-                  </li>
-                </Link>
-              );
-            }
-            return null;
-          })}
-        </ul>
+        {genres.map((genre) => {
+          return (
+            <Link
+              onClick={(e) => handleFilter(e)}
+              className={`category ${
+                filter === genre.name ? "background-red" : ""
+              }`}
+              to={"/"}
+              id={genre.name}
+            >
+              {genre.name}
+            </Link>
+          );
+        })}
       </div>
     </div>
   );

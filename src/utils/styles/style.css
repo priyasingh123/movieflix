@@ -1,108 +1,91 @@
-*{
-    margin: 0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-.navbar{
-    display:flex;
-    position: relative;
+.navbar {
+  display: flex;
+  position: relative;
 }
 
-.menu-items{
-    flex:12;
-    background-color: #161414fc;
-    display: flex;
+.menu-items {
+  flex: 12;
+  background-color: #161414fc;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 }
 
-.navbar-img{
-    flex:1;
-    margin:2px;
-    width: 100px;
-    height: 100px;
+.navbar-img {
+  flex: 1;
+  margin: 2px;
+  width: 100px;
+  height: 100px;
 }
 
-.menu-items ul{
-    margin-left: 20px;
-    list-style: none;
-    display: flex;
+.logo-title {
+  position: absolute;
+  bottom: -5px;
+  padding: 0;
+  left: 2px;
+  color: red;
+  font-weight: 1000;
+  font-size: x-large;
+  flex: 1;
 }
 
-.list-item{
-    text-decoration: none;
+.category {
+  margin: 6px;
+  padding: 8px 29px;
+  border-radius: 10px;
+  background-color: #453e3e;
+  box-sizing: border-box;
+  color: white;
+  text-decoration: none;
 }
 
-/* .menu-items > ul li{
-    margin: 30px 6px;
-    padding: 8px 29px;
-    border-radius: 10px;
-    background-color: #453e3e;
-    box-sizing: border-box;
-    flex:1;
-    color: white;
-} */
-.category{
-    margin: 30px 6px;
-    padding: 8px 29px;
-    border-radius: 10px;
-    background-color: #453e3e;
-    box-sizing: border-box;
-    flex:1;
-    color: white;
+.movie-card {
+  position: relative;
+  padding: 10px;
 }
 
-.movie-card{
-    position: relative;
-    padding: 10px;
+.movie-title {
+  position: absolute;
+  background-color: red;
+  bottom: 35px;
+  left: 10px;
+  padding: 0 5px;
 }
 
-.movie-title{
-    position: absolute;
-    background-color: red;
-    bottom: 10px;
-    bottom: 35px;
-    left: 10px;
-    padding: 0 5px;
+.movie-rating {
+  position: absolute;
+  bottom: 9px;
+  padding: 0 5px;
+  left: 10px;
+  background-color: red;
 }
 
-.movie-rating{
-    position: absolute;
-    bottom: 9px;
-    padding: 0 5px;
-    left: 10px;
-    background-color: red;    
+.yearly-movie {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 2%;
 }
 
-.yearly-movie{
-    display: flex;
-    flex-wrap: wrap;
-    margin:0 2%;
+.movie-board {
+  background-color: black;
 }
 
-.movie-board{
-    background-color: black;
+.white-label {
+  color: white;
 }
 
-.logo-title{
-    position: absolute;
-    bottom: -5px;
-    padding: 0;
-    left: 2px;
-    color: red;
-    font-weight: 1000;
-    font-size: x-large;
+.background-red {
+  background-color: red;
 }
 
-.white-label{
-    color: white;
-}
-
-.background-red{
-    background-color: red;
-}
-
-.year-label{
-    margin:0 2%;
-    padding-left: 10px;
-    font-weight: 500;
-    font-size: xx-large;
+.year-label {
+  margin: 0 2%;
+  padding-left: 10px;
+  font-weight: 500;
+  font-size: xx-large;
 }
