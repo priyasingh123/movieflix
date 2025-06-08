@@ -1,51 +1,47 @@
-import MovieCard from "./MovieCard";
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
+import YearlyMovieSubBoard from "./YearlyMovieSubBoard";
 
-const MovieBoard = ({ movies }) => {
-  const [allMovies, setAllMovies] = useState([]);
+const MovieBoard = () => {
+  const [categorizedMovies, setCategorizedMovies] = useState({ 2012: [] });
   const [year, setYear] = useState(2012);
   const [page, setPage] = useState(1);
 
+  const d1 = new Date();
+  const currentYear = d1.getFullYear();
+
   // TODO: move this function in common place
-  const fetchMoreData = async () => {
+  const fetchMovieData = async () => {
     const baseUrl = process.env.REACT_APP_BASEURL;
     const apiKey = process.env.REACT_APP_APIKEY;
     const url = `${baseUrl}/discover/movie?api_key=${apiKey}&primary_release_year=${year}&page=${page}&vote_count.gte=100&sort_by=popularity.desc`;
 
     const res = await fetch(url);
     const response = await res.json();
-    setAllMovies(allMovies.concat(response.results));
-    setYear(() => year + 1);
+    setCategorizedMovies({ ...categorizedMovies, [year]: response.results });
+    setYear(year + 1);
   };
 
   useEffect(() => {
-    if (movies && movies.length > 0) {
-      setAllMovies(movies);
-    }
-  }, [movies]);
+    fetchMovieData();
+  }, []);
 
   return (
     <div className="movie-board">
       <InfiniteScroll
-        dataLength={allMovies}
-        next={fetchMoreData}
-        hasMore={Number(year) < 2025}
+        dataLength={Object.values(categorizedMovies).length * 20}
+        next={fetchMovieData}
+        hasMore={Number(year) <= currentYear}
         loader={<h4>Loading...</h4>}
       >
-        <label className="year-label white-label">{year}</label>
-        <div className="yearly-movie">
-          {allMovies?.map((movie, index) => {
-            return (
-              <MovieCard
-                key={`${movie.original_title}-${index}`}
-                imgUrl={movie.poster_path}
-                name={movie.original_title}
-                rating={movie.vote_average}
-              />
-            );
-          })}
-        </div>
+        {Object.keys(categorizedMovies).map((yearKey) => {
+          return (
+            <YearlyMovieSubBoard
+              year={yearKey}
+              allMovies={categorizedMovies[yearKey]}
+            />
+          );
+        })}
       </InfiniteScroll>
     </div>
   );
