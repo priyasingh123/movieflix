@@ -10,7 +10,6 @@ const MovieBoard = ({ genreFilter }) => {
   const d1 = new Date();
   const currentYear = d1.getFullYear();
 
-  // TODO: move this function in common place
   const fetchMovieData = async () => {
     const baseUrl = process.env.REACT_APP_BASEURL;
     const apiKey = process.env.REACT_APP_APIKEY;
@@ -33,8 +32,11 @@ const MovieBoard = ({ genreFilter }) => {
   }, []);
 
   useEffect(() => {
-    setYear(2012);
-    fetchMovieData();
+    if (genreFilter !== undefined) {
+      setYear(2012);
+      setCategorizedMovies({ 2012: [] });
+      fetchMovieData();
+    }
   }, [genreFilter]);
 
   return (
