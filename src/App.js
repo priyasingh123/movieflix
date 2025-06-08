@@ -11,7 +11,7 @@ function App() {
       <Routes>
         <Route
           exact
-          path="movieflix/movies"
+          path="movieflix"
           element={
             <>
               <Navbar setGenreFilter={setGenreFilter} />
