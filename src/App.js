@@ -11,7 +11,7 @@ function App() {
       <Routes>
         <Route
           exact
-          path="/moviefix"
+          path="/movieflix"
           element={
             <>
               <Navbar setMovies={setMovies} />
