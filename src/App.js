@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
-  const [movies, setMovies] = useState([]);
+  const [genreFilter, setGenreFilter] = useState();
   return (
     <Router>
       <Routes>
@@ -14,8 +14,8 @@ function App() {
           path="/movieflix"
           element={
             <>
-              <Navbar setMovies={setMovies} />
-              <MovieBoard movies={movies} />
+              <Navbar setGenreFilter={setGenreFilter} />
+              <MovieBoard genreFilter={genreFilter} />
             </>
           }
         />

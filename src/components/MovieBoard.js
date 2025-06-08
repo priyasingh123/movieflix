@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import YearlyMovieSubBoard from "./YearlyMovieSubBoard";
 
-const MovieBoard = () => {
+const MovieBoard = ({ genreFilter }) => {
   const [categorizedMovies, setCategorizedMovies] = useState({ 2012: [] });
   const [year, setYear] = useState(2012);
   const [page, setPage] = useState(1);
@@ -14,7 +14,13 @@ const MovieBoard = () => {
   const fetchMovieData = async () => {
     const baseUrl = process.env.REACT_APP_BASEURL;
     const apiKey = process.env.REACT_APP_APIKEY;
-    const url = `${baseUrl}/discover/movie?api_key=${apiKey}&primary_release_year=${year}&page=${page}&vote_count.gte=100&sort_by=popularity.desc`;
+    const url = new URL(`${baseUrl}/discover/movie`);
+    url.searchParams.append("api_key", apiKey);
+    url.searchParams.append("primary_release_year", year);
+    url.searchParams.append("page", page);
+    url.searchParams.append("vote_count.gte", "100");
+    url.searchParams.append("sort_by", "popularity.desc");
+    genreFilter && url.searchParams.append("with_genres", genreFilter);
 
     const res = await fetch(url);
     const response = await res.json();
@@ -25,6 +31,11 @@ const MovieBoard = () => {
   useEffect(() => {
     fetchMovieData();
   }, []);
+
+  useEffect(() => {
+    setYear(2012);
+    fetchMovieData();
+  }, [genreFilter]);
 
   return (
     <div className="movie-board">

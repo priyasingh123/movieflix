@@ -3,10 +3,9 @@ import "../utils/styles/style.css";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-const Navbar = () => {
+const Navbar = ({ setGenreFilter }) => {
   const [filter, setFilter] = useState("all");
   const [genres, setGenres] = useState([]);
-  const [page] = useState(1);
 
   const baseUrl = process.env.REACT_APP_BASEURL;
   const apiKey = process.env.REACT_APP_APIKEY;
@@ -23,7 +22,8 @@ const Navbar = () => {
   }, []);
 
   const handleFilter = (e) => {
-    setFilter(e.target.id);
+    setFilter(e.target.name);
+    setGenreFilter(e.target.id);
   };
 
   return (
@@ -38,7 +38,8 @@ const Navbar = () => {
                 filter === genre.name ? "background-red" : ""
               }`}
               to={"#"}
-              id={genre.name}
+              name={genre.name}
+              id={genre.id}
             >
               {genre.name}
             </Link>
