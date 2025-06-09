@@ -68,6 +68,7 @@ const Navbar = ({ setGenreFilter }) => {
                 to={"#"}
                 name={genre.name}
                 id={genre.id}
+                onClick={(e) => handleFilter(e)}
               >
                 {genre.name}
               </Link>
