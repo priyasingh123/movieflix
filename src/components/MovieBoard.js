@@ -35,14 +35,23 @@ const MovieBoard = ({ genreFilter }) => {
     if (genreFilter !== undefined) {
       setYear(2012);
       setCategorizedMovies({ 2012: [] });
-      fetchMovieData();
     }
   }, [genreFilter]);
+
+  // Separate useEffect to trigger after state updates
+  useEffect(() => {
+    if (year === 2012 && Object.keys(categorizedMovies).includes("2012")) {
+      fetchMovieData();
+    }
+  }, [year]);
 
   return (
     <div className="movie-board">
       <InfiniteScroll
-        dataLength={Object.values(categorizedMovies).length * 20}
+        dataLength={Object.values(categorizedMovies).reduce(
+          (total, movies) => total + movies.length,
+          0
+        )}
         next={fetchMovieData}
         hasMore={Number(year) <= currentYear}
         loader={<h4>Loading...</h4>}
