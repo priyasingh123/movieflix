@@ -21,6 +21,12 @@
   justify-content: flex-start;
 }
 
+.more-btn {
+  background-color: #161414fc;
+  padding-top: 9px;
+  padding-left: 10px;
+}
+
 .navbar-img {
   margin: 2px;
   width: 132px;
@@ -29,6 +35,21 @@
     height: 85px;
     width: 103px;
   }
+}
+
+.mobile-navbar {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  height: 400px;
+  overflow-y: auto;
+  text-align: center;
+  top: 118px;
+  left: 179px;
+}
+
+.mobile-navbar a {
+  margin: 6px 8px;
 }
 
 .logo-title {

@@ -2,11 +2,13 @@ import img from "../utils/image/movie-logo.jpg";
 import "../utils/styles/style.css";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import MobileNavBar from "./MobileNavBar";
 
 const Navbar = ({ setGenreFilter }) => {
   const [filter, setFilter] = useState("all");
   const [genres, setGenres] = useState([]);
   const [isMobile, setIsMobile] = useState(false);
+  const [showMobileNavbar, setShowMobileNavbar] = useState(false);
 
   const baseUrl = process.env.REACT_APP_BASEURL;
   const apiKey = process.env.REACT_APP_APIKEY;
@@ -30,8 +32,16 @@ const Navbar = ({ setGenreFilter }) => {
   }, []);
 
   const handleFilter = (e) => {
-    setFilter(e.target.name);
-    setGenreFilter(e.target.id);
+    if (isMobile) {
+      setFilter(e.target.name);
+      setTimeout(() => {
+        setShowMobileNavbar(false);
+        setGenreFilter(e.target.id);
+      }, 500);
+    } else {
+      setFilter(e.target.name);
+      setGenreFilter(e.target.id);
+    }
   };
 
   const mobileGenres = ["Action", "Comedy", "Drama", "Horror"];
@@ -39,11 +49,12 @@ const Navbar = ({ setGenreFilter }) => {
     <div className="navbar">
       <img className="navbar-img" src={img} alt="logo" />
       <label className="logo-title">MOVIEFLIX</label>
-      <div className="menu-items" onClick={(e) => handleFilter(e)}>
+      <div className="menu-items">
         <Link
           className={`category ${filter === "All" ? "background-red" : ""}`}
           to={"#"}
           name="All"
+          onClick={(e) => handleFilter(e)}
         >
           All
         </Link>
@@ -77,6 +88,7 @@ const Navbar = ({ setGenreFilter }) => {
                   to={"#"}
                   name={genre.name}
                   id={genre.id}
+                  onClick={(e) => handleFilter(e)}
                 >
                   {genre.name}
                 </Link>
@@ -84,15 +96,19 @@ const Navbar = ({ setGenreFilter }) => {
             })}
         {isMobile && (
           <label
-            className="white-label"
-            style={{
-              "background-color": "#161414fc",
-              "padding-top": "9px",
-              "padding-left": "10px",
-            }}
+            onClick={() => setShowMobileNavbar(!showMobileNavbar)}
+            className="white-label more-btn"
           >
             More &darr;
           </label>
+        )}
+        {isMobile && showMobileNavbar && (
+          <MobileNavBar
+            genres={genres}
+            mobileGenres={mobileGenres}
+            filter={filter}
+            handleFilter={handleFilter}
+          />
         )}
       </div>
     </div>
