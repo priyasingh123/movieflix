@@ -23,6 +23,7 @@ const MovieBoard = ({ genreFilter }) => {
 
     const res = await fetch(url);
     const response = await res.json();
+    // TODO: if number of movie is less than 20, then go to next page and so on
     setCategorizedMovies({ ...categorizedMovies, [year]: response.results });
     setYear(year + 1);
   };
