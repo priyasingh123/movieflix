@@ -54,6 +54,7 @@ const Navbar = ({ setGenreFilter }) => {
           className={`category ${filter === "All" ? "background-red" : ""}`}
           to={"#"}
           name="All"
+          key="all"
           onClick={(e) => handleFilter(e)}
         >
           All
@@ -68,6 +69,7 @@ const Navbar = ({ setGenreFilter }) => {
                 to={"#"}
                 name={genre.name}
                 id={genre.id}
+                key={genre.id}
                 onClick={(e) => handleFilter(e)}
               >
                 {genre.name}
@@ -89,6 +91,7 @@ const Navbar = ({ setGenreFilter }) => {
                   to={"#"}
                   name={genre.name}
                   id={genre.id}
+                  key={genre.id}
                   onClick={(e) => handleFilter(e)}
                 >
                   {genre.name}
