@@ -5,8 +5,6 @@ import YearlyMovieSubBoard from "./YearlyMovieSubBoard";
 const MovieBoard = ({ genreFilter }) => {
   const [categorizedMovies, setCategorizedMovies] = useState({ 2012: [] });
   const [year, setYear] = useState(2012);
-  const [selectedYear, setSelectedYear] = useState(2012);
-  const [viewMoreMovies, setViewMoreMovies] = useState(false);
   const [page, setPage] = useState(1);
 
   const d1 = new Date();
@@ -25,28 +23,13 @@ const MovieBoard = ({ genreFilter }) => {
 
     const res = await fetch(url);
     const response = await res.json();
-    setCategorizedMovies({
-      ...categorizedMovies,
-      [year]: (categorizedMovies[year] || []).concat(response.results),
-    });
-    setViewMoreMovies(false);
+    setCategorizedMovies({ ...categorizedMovies, [year]: response.results });
     setYear(year + 1);
   };
 
   useEffect(() => {
-    if (viewMoreMovies) {
-      setYear(selectedYear);
-      fetchMovieData();
-    }
-  }, [selectedYear, viewMoreMovies]);
-
-  useEffect(() => {
     fetchMovieData();
   }, []);
-
-  useEffect(() => {
-    fetchMovieData();
-  }, [page]);
 
   useEffect(() => {
     if (genreFilter !== undefined) {
@@ -80,10 +63,6 @@ const MovieBoard = ({ genreFilter }) => {
               year={yearKey}
               key={yearKey}
               allMovies={categorizedMovies[yearKey]}
-              setPage={setPage}
-              page={page}
-              setViewMoreMovies={setViewMoreMovies}
-              setSelectedYear={setSelectedYear}
             />
           );
         })}
