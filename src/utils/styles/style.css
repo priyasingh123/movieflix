@@ -81,6 +81,21 @@
   }
 }
 
+.positioned-yearly-movie {
+  position: relative;
+}
+
+.view-more-btn {
+  position: absolute;
+  bottom: 2vh;
+  right: 2%;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.view-more-btn:hover {
+  background-color: red;
+}
+
 .movie-card {
   display: flex;
   flex-direction: column;
