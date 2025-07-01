@@ -32,6 +32,12 @@ const MovieBoard = ({ genreFilter }) => {
   }, []);
 
   useEffect(() => {
+    if (window.innerHeight >= document.documentElement.offsetHeight) {
+      fetchMovieData();
+    }
+  });
+
+  useEffect(() => {
     if (genreFilter !== undefined) {
       setYear(2012);
       setCategorizedMovies({ 2012: [] });
