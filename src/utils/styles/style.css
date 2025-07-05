@@ -88,9 +88,12 @@
   position: relative;
   padding: 10px;
   margin: 0 4px;
-  @media screen and (max-width: 1200px) {
-    width: 137px;
-  }
+  transition: transform 0.3s ease; /* smooth animation */
+}
+
+.movie-card:hover {
+  transform: scale(1.2); /* zoom by 20% */
+  z-index: 1;
 }
 
 .movie-title {
