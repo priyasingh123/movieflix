@@ -10,7 +10,7 @@ const MovieBoard = ({ genreFilter }) => {
   const currentYear = new Date().getFullYear();
 
   const fetchMovieData = useCallback(
-    async (fetchYear) => {
+    async (fetchYear, page) => {
       if (fetchYear > currentYear || isFetching) return;
       setIsFetching(true);
       try {
@@ -21,15 +21,25 @@ const MovieBoard = ({ genreFilter }) => {
         url.searchParams.append("primary_release_year", fetchYear);
         url.searchParams.append("vote_count.gte", "100");
         url.searchParams.append("sort_by", "popularity.desc");
+        url.searchParams.append("page", page.toString());
         genreFilter && url.searchParams.append("with_genres", genreFilter);
 
         const res = await fetch(url);
         const response = await res.json();
         setCategorizedMovies((prev) => ({
           ...prev,
-          [fetchYear]: response?.results || [],
+          [fetchYear]: {
+            movies: [
+              ...(prev[fetchYear]?.movies || []),
+              ...(response?.results || []),
+            ],
+            page,
+            totalPages: response?.total_pages || 1,
+          },
         }));
-        setYear(fetchYear + 1);
+        if (page === 1) {
+          setYear(fetchYear + 1);
+        }
       } catch (err) {
         console.error("Fetch error:", err);
       } finally {
@@ -40,21 +50,16 @@ const MovieBoard = ({ genreFilter }) => {
   );
 
   useEffect(() => {
-    fetchMovieData(2012);
+    fetchMovieData(2012, 1);
   }, []);
 
   useEffect(() => {
     if (genreFilter !== undefined) {
       setCategorizedMovies({});
       setYear(2012);
-      fetchMovieData(2012);
+      fetchMovieData(2012, 1);
     }
   }, [genreFilter]);
-
-  // This will be used for "Show More" feature later
-  const fetchMoreForYear = async (yearKey) => {
-    // fetch page 2, 3 etc for that year and append to categorizedMovies[yearKey]
-  };
 
   const yearKeys = Object.keys(categorizedMovies);
 
@@ -64,13 +69,20 @@ const MovieBoard = ({ genreFilter }) => {
         useWindowScroll
         style={{ height: "90vh" }}
         data={yearKeys} //it is virtualizing based on year
-        endReached={() => fetchMovieData(year)} // loads next year when you reach bottom
+        endReached={() => fetchMovieData(year, 1)} // loads next year when you reach bottom
         overscan={200}
         itemContent={(index, yearKey) => (
           <YearlyMovieSubBoard
             year={yearKey}
-            allMovies={categorizedMovies[yearKey] || []}
-            onShowMore={() => fetchMoreForYear(yearKey)} // ready for future feature!
+            allMovies={categorizedMovies[yearKey].movies || []}
+            page={categorizedMovies[yearKey].page}
+            totalPages={categorizedMovies[yearKey].totalPages}
+            onShowMore={() =>
+              fetchMovieData(
+                Number(yearKey),
+                categorizedMovies[yearKey].page + 1,
+              )
+            }
           />
         )}
         components={{
