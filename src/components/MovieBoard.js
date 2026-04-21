@@ -23,19 +23,13 @@ const MovieBoard = ({ genreFilter }) => {
 
     const res = await fetch(url);
     const response = await res.json();
-    setCategorizedMovies({ ...categorizedMovies, [year]: response.results });
+    setCategorizedMovies((prev) => ({ ...prev, [year]: response?.results }));
     setYear(year + 1);
   };
 
   useEffect(() => {
     fetchMovieData();
   }, []);
-
-  useEffect(() => {
-    if (window.innerHeight >= document.documentElement.offsetHeight) {
-      fetchMovieData();
-    }
-  });
 
   useEffect(() => {
     if (genreFilter !== undefined) {
@@ -57,7 +51,7 @@ const MovieBoard = ({ genreFilter }) => {
       <InfiniteScroll
         dataLength={Object.values(categorizedMovies).reduce(
           (total, movies) => total + movies.length,
-          0
+          0,
         )}
         next={fetchMovieData}
         hasMore={Number(year) <= currentYear}
